@@ -4,7 +4,8 @@ project('gamemode-libdbus',
         meson_version: '>= 0.46.0',
         default_options: ['warning_level=1',
                           'c_std=gnu11',
-                          'buildtype=debugoptimized']
+                          'buildtype=debugoptimized',
+                          'b_asneeded=false']
 )
 
 cc = meson.get_compiler('c')
@@ -75,3 +76,16 @@ pkg.generate(gamemode_auto,
   install_dir: pkgconfigdir,
   subdirs: [hdrsubdir],
 )
+
+# examples
+
+gm_auto = declare_dependency(
+  link_with: [gamemode_auto],
+  include_directories: [
+    include_directories('.')
+])
+
+executable('gm-auto',
+  ['examples/auto.c'],
+  dependencies: [gm_auto],
+  install: false)
