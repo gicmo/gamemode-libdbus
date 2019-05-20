@@ -89,3 +89,14 @@ executable('gm-auto',
   ['examples/auto.c'],
   dependencies: [gm_auto],
   install: false)
+
+gm = declare_dependency(
+  link_with: [gamemode],
+  include_directories: [
+    include_directories('.')
+  ])
+
+executable('gm-simple',
+  ['examples/simple.c'],
+  dependencies: [dl],
+  install: false)
