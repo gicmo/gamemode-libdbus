@@ -58,3 +58,20 @@ pkg.generate(
   install_dir: pkgconfigdir,
   subdirs: [hdrsubdir],
 )
+
+gamemode_auto = shared_library(
+  'gamemodeauto',
+	['gamemode-auto.c'],
+	dependencies: [dl],
+	install: true,
+	soversion: lib_current,
+	version: lib_version)
+
+pkg.generate(gamemode_auto,
+  name: 'gamemodeauto-libdbus',
+  description: 'GameMode client library using libdbus',
+  version: meson.project_version(),
+  libraries_private: [dl, '-Wl,--no-as-needed'],
+  install_dir: pkgconfigdir,
+  subdirs: [hdrsubdir],
+)
